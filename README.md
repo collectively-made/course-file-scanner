@@ -48,7 +48,7 @@ npm i -D course-file-scanner
 ```js
 import courseFileScanner from "course-file-scanner"
 
-courseFileScanner() // true
+courseFileScanner('path/to/file.zip') // adm-zip object
 ```
 
 ## License
