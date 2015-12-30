@@ -13,22 +13,20 @@ exports.default = function (filePath) {
     },
 
     getCourseFiles: function getCourseFiles() {
-      return courseZip.getEntries().filter(courseFileScanner._isCourseFile);
+      return courseZip.getEntries().filter(courseFileScanner._isCourseFile).map(courseFileScanner._getCourseFileId);
     },
 
     _isCourseFile: function _isCourseFile(file) {
       return file.entryName.match(/^(?=.*\bcsfiles\/home_dir\b)(?!.*\b.xml\b).*$/ig);
     },
 
-    getCourseFileIds: function getCourseFileIds() {
-      return courseFileScanner.getCourseFiles().map(courseFileScanner._getCourseFileId);
-    },
-
     _getCourseFileId: function _getCourseFileId(file) {
       var fileName = file.entryName;
       var startIndex = fileName.lastIndexOf('xid-') + 4;
       var endIndex = fileName.indexOf('_', startIndex);
-      return fileName.substring(startIndex, endIndex);
+      file.courseFileId = fileName.substring(startIndex, endIndex);
+
+      return file;
     }
   };
 
