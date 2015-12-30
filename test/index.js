@@ -13,3 +13,11 @@ test('Get Course Files', (t) => {
 
   t.equals((Array.isArray(courseFiles) && courseFiles.length > 0), true, 'Makes sure an array of course files is returned.');
 });
+
+test('Get Course DAT Files', (t) => {
+  t.plan(1);
+  let courseZip = courseFileScanner('test-course.zip');
+  let courseFiles = courseZip.getDatFiles();
+
+  t.equals((Array.isArray(courseFiles) && courseFiles.length === 129), true, 'Makes sure an array of course DAT files is returned.');
+});

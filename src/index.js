@@ -27,6 +27,14 @@ export default function (filePath) {
       file.courseFileId = fileName.substring(startIndex, endIndex);
 
       return file;
+    },
+
+    getDatFiles: () => {
+      return courseZip.getEntries().filter(courseFileScanner._isDatFile);
+    },
+
+    _isDatFile: (file) => {
+      return file.entryName.match(/^(?=.*res)(?=.*\b\.dat\b).*$/g);
     }
   };
 
